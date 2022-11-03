@@ -1,4 +1,3 @@
-import { type } from "os";
 import { useCallback, useEffect, useState } from "react";
 import { Mode, Stat } from "../../App";
 import { LOCAL_STORAGE_KEYS } from "../../constants";

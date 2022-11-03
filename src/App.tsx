@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import style from "./App.module.css";
 import SquareBoard from "./components/square_row/SquareBoard.component";
@@ -11,7 +11,7 @@ export type Mode = { name: string; field: number };
 export type Stat = string;
 
 function App() {
-  const [modes, setModes] = useState<Mode[]>();
+  const [modes, setModes] = useState<Mode[]>([]);
   const [selectedMode, setSelectedMode] = useState<Mode>();
   const [stats, setStats] = useState<Stat[] | undefined>();
 
@@ -39,13 +39,12 @@ function App() {
       );
     }
   };
+
   const handleSelectMode = () => {
     const selectedModeFromStorage = localStorage.getItem(
       LOCAL_STORAGE_KEYS.SELECTED_MODE
     );
     if (selectedModeFromStorage) {
-      console.log(selectedModeFromStorage);
-
       setSelectedMode(JSON.parse(selectedModeFromStorage));
     }
   };
@@ -54,7 +53,7 @@ function App() {
     <div className={style.App}>
       <div className={style.playboard}>
         <SelectMode
-          options={modes || []}
+          options={modes}
           setMode={setSelectedMode}
           selectedMode={selectedMode}
           setStats={setStats}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { v4 } from "uuid";
 import { Mode, Stat } from "../../App";
 import Square from "../square/Square.component";
 import style from "./styles.module.css";
@@ -11,41 +12,38 @@ type SquareBoardProps = {
 };
 
 const SquareBoard = ({ rowCount, mode, setStats, stats }: SquareBoardProps) => {
-  const [row, setRow] = useState<number[][]>([]);
+  const [board, setBoard] = useState<string[][]>([]);
 
   useEffect(() => {
     const allSquares = Array.from(Array(rowCount).keys());
-    const board = [];
+    const newBoard = [];
     for (let index = 0; index < allSquares.length; index++) {
-      board.push(
-        Array.from(Array(rowCount).keys()).map((el, i) => rowCount * index + i)
-      );
+      newBoard.push(Array.from(Array(rowCount).keys()).map((_) => v4()));
     }
-    setRow(board);
+    setBoard(newBoard);
   }, [rowCount]);
 
   return (
     <div className={style.col}>
-      {row.length
-        ? row.map((el, index) => {
-            return (
-              <div key={index} className={style.row}>
-                {el.map((elem, i) => {
-                  return (
-                    <Square
-                      key={elem}
-                      column={i + 1}
-                      mode={mode}
-                      row={index + 1}
-                      stats={stats}
-                      setStats={setStats}
-                    />
-                  );
-                })}
-              </div>
-            );
-          })
-        : null}
+      {board.length &&
+        board.map((el, index) => {
+          return (
+            <div key={index} className={style.row}>
+              {el.map((elem, i) => {
+                return (
+                  <Square
+                    key={elem}
+                    column={i + 1}
+                    mode={mode}
+                    row={index + 1}
+                    stats={stats}
+                    setStats={setStats}
+                  />
+                );
+              })}
+            </div>
+          );
+        })}
     </div>
   );
 };

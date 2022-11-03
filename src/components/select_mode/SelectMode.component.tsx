@@ -51,6 +51,10 @@ const SelectMode = ({
     setSelectedLabel(option.name);
   };
 
+  const pickButtonClass =
+    selectedLabel !== "Pick option:" && style.pick_button_color;
+  const optionContainerStyle = showOptions ? style.show : style.hide;
+
   return (
     <div className={style.selectContainer}>
       <button className={style.select_button} onClick={onSelectButtonClick}>
@@ -60,18 +64,12 @@ const SelectMode = ({
       <div className={style.modes}>
         <p className={style.error}>{error}</p>
         <div
-          className={`${style.pick_button} ${
-            selectedLabel !== "Pick option:" && style.pick_button_color
-          }`}
+          className={`${style.pick_button} ${pickButtonClass}`}
           onClick={() => setShowOptions(!showOptions)}
         >
           <p>{selectedLabel} </p>
         </div>
-        <div
-          className={`${style.options} ${
-            showOptions ? style.show : style.hide
-          }`}
-        >
+        <div className={`${style.options} ${optionContainerStyle}`}>
           {options.map((option) => {
             return (
               <button key={option.field} onClick={() => handleSelected(option)}>
