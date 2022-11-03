@@ -1,0 +1,13 @@
+.square {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 2px;
+  margin: 3px;
+}
+.hovered {
+  background-color: blue;
+}
+.not_hovered {
+  background-color: white;
+}

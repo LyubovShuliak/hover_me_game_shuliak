@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  padding: 90px;
+}
+.playboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
