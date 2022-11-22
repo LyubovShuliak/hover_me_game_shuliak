@@ -5,7 +5,7 @@ import Square from "../square/Square.component";
 import style from "./styles.module.css";
 
 type SquareBoardProps = {
-  rowCount: number;
+  rowCount: number | null;
   mode: Mode | undefined;
   setStats: (args: Stat[] | undefined) => void;
   stats: Stat[] | undefined;
@@ -15,12 +15,14 @@ const SquareBoard = ({ rowCount, mode, setStats, stats }: SquareBoardProps) => {
   const [board, setBoard] = useState<string[][]>([]);
 
   useEffect(() => {
-    const allSquares = Array.from(Array(rowCount).keys());
-    const newBoard = [];
-    for (let index = 0; index < allSquares.length; index++) {
-      newBoard.push(Array.from(Array(rowCount).keys()).map((_) => v4()));
+    if (rowCount) {
+      const allSquares = Array.from(Array(rowCount).keys());
+      const newBoard = [];
+      for (let index = 0; index < allSquares.length; index++) {
+        newBoard.push(Array.from(Array(rowCount).keys()).map((_) => v4()));
+      }
+      setBoard(newBoard);
     }
-    setBoard(newBoard);
   }, [rowCount]);
 
   return (

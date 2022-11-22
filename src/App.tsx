@@ -58,13 +58,16 @@ function App() {
           selectedMode={selectedMode}
           setStats={setStats}
         />
+
         <div className={style.board}>
-          <SquareBoard
-            rowCount={selectedMode ? selectedMode.field : 0}
-            mode={selectedMode}
-            setStats={setStats}
-            stats={stats}
-          />
+          {selectedMode && (
+            <SquareBoard
+              rowCount={selectedMode ? selectedMode.field : null}
+              mode={selectedMode}
+              setStats={setStats}
+              stats={stats}
+            />
+          )}
         </div>
       </div>
       <HoveredSquaresStatistic statistics={stats} />
